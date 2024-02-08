@@ -1,0 +1,12 @@
+<html>
+<body>
+<div class = "principal">
+  <p class="city">{{city}}</p>
+  <div>
+    <img src={{currentIcon}}>
+    <p class="degree">{{currentTemp}} °C</p>
+  </div>
+  <my-component (newItemEvent)="addItem($event)"></my-component>
+</div>
+</body>
+</html>
