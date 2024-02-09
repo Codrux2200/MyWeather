@@ -1,0 +1,18 @@
+<div class="section-1">
+  <router-outlet></router-outlet>
+  <button [routerLink]="['/api']" routerLinkActive="router-link-active" >
+    <img src="https://upload.wikimedia.org/wikipedia/commons/d/dc/Settings-icon-symbol-vector.png"/>
+  </button>
+</div>
+<html>
+<body>
+<div class = "principal">
+  <p class="city">{{city}}</p>
+  <div>
+    <img src={{currentIcon}}>
+    <p class="degree">{{currentTemp}} °C</p>
+  </div>
+  <my-component (newItemEvent)="addItem($event)"></my-component>
+</div>
+</body>
+</html>

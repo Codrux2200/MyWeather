@@ -3,7 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { Output, EventEmitter } from '@angular/core';
 import axios from 'axios';
 import { Meteo } from '../Interface/meteo.interface';
-import { API_KEY } from '../env';
+const API_KEY = localStorage.getItem("API_KEY");
 @Component({
   selector: 'my-component',
   standalone: true,
@@ -12,6 +12,7 @@ import { API_KEY } from '../env';
   styleUrl: './MyComponent.component.css'
 })
 export class MyComponent {
+
   title = 'MyComponent';
   value = "";
   apiUrl = "https://api.weatherapi.com/v1/forecast.json"
@@ -31,7 +32,7 @@ export class MyComponent {
 
   onClick(){
     this.click = !this.click;
-
+    console.log("apikey" + API_KEY);
     if (this.value == ""){
         alert("input must me a valid city name");
         return;

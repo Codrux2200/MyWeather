@@ -1,9 +1,11 @@
 # MyWeather
 
-To be able to use this WebSite you need to create a file named env.ts is the src directory and export and API_KEY string variable that contain the api_key for weatherapi
+To be able to use this WebSite you need to create a file named env.json is the src directory use the template written here
 
-```js
-export const API_KEY : string = <API-KEY>
+```json
+{
+    "API_KEY" : "<API-KEY>"
+}
 ```
 
 to get your api key please register at:
