@@ -3,6 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { Output, EventEmitter } from '@angular/core';
 import axios from 'axios';
 import { Meteo } from '../Interface/meteo.interface';
+import { MeteoNetwork } from '../network/Meteo.network';
 const API_KEY = localStorage.getItem("API_KEY");
 @Component({
   selector: 'my-component',
@@ -24,6 +25,7 @@ export class MyComponent {
     condition : "",
     forecast : []
   };
+  meteonetwork = new MeteoNetwork({}, this.apiUrl);
   @Output() newItemEvent = new EventEmitter<Meteo>(); 
 
   onKey(e : Event){
@@ -37,28 +39,11 @@ export class MyComponent {
         alert("input must me a valid city name");
         return;
     }
-
-    axios.get(this.apiUrl, {
-        params : {
-            key : API_KEY,
-            q : this.value,
-            days : 2
-        }
-      })
-      .then(response => {
-        console.log(response.data);
-        this.meteo = {
-          temp : response.data.current.temp_c,
-          city : response.data.location.name,
-          img : response.data.current.condition.icon,
-          condition : response.data.current.condition.text,
-          forecast : response.data.forecast.forecastday,
-        }
-        this.newItemEvent.emit(this.meteo);
-      })
-      .catch(error => {
-        alert('Error fetching data: ' + error.message);
-        console.error('Error fetching data:', error);
-      });
+    this.meteonetwork.Forecast({key : API_KEY, q : this.value, day : 3}).then((meteo) =>{
+      console.log("meteo = ", meteo);
+      if (meteo != null){
+        this.newItemEvent.emit(meteo);
+      }
+    });
   }
 }
