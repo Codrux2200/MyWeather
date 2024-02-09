@@ -18,13 +18,6 @@ export class MyComponent {
   value = "";
   apiUrl = "https://api.weatherapi.com/v1/forecast.json"
   click = false;
-  meteo : Meteo = {
-    temp : 0,
-    city : "",
-    img : "",
-    condition : "",
-    forecast : []
-  };
   meteonetwork = new MeteoNetwork({}, this.apiUrl);
   @Output() newItemEvent = new EventEmitter<Meteo>(); 
 
@@ -33,14 +26,11 @@ export class MyComponent {
   }
 
   onClick(){
-    this.click = !this.click;
-    console.log("apikey" + API_KEY);
     if (this.value == ""){
         alert("input must me a valid city name");
         return;
     }
     this.meteonetwork.Forecast({key : API_KEY, q : this.value, day : 3}).then((meteo) =>{
-      console.log("meteo = ", meteo);
       if (meteo != null){
         this.newItemEvent.emit(meteo);
       }
